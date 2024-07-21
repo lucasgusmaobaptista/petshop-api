@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 
@@ -63,10 +62,10 @@ public class PetController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Pet> updatePet(@PathVariable Long id, @RequestBody Pet pet) {
+    public ResponseEntity<String> updatePet(@PathVariable Long id, @RequestBody Pet pet) {
         Optional<Pet> novoPet= service.encontrarReservaID(id);
         if (!novoPet.isPresent()) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Reserva não encontrada!");
         }
         Pet petAtualizado = novoPet.get();
         petAtualizado.setName(pet.getName());
@@ -74,7 +73,7 @@ public class PetController {
         petAtualizado.setIdade(pet.getIdade());
         petAtualizado.setHorarioReserva(pet.getHorarioReserva());
         Pet updatedPet = service.criarReserva(petAtualizado);
-        return ResponseEntity.ok(updatedPet);
+        return ResponseEntity.ok(updatedPet.toString());
     }
 
     @DeleteMapping("/delete/{id}")
