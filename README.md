@@ -43,6 +43,22 @@ Execute o seguinte comando na raiz do projeto para compilar o projeto e baixar a
 
 `gradle build`
 
+## Configurações Básicas
+
+Abra o arquivo src/main/resources/application.properties e configure as propriedades do banco de dados:
+
+```bash
+spring.datasource.url=jdbc:mysql://localhost:3306/produtos_db
+spring.datasource.username=seu-usuario
+spring.datasource.password=sua-senha
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+(ESCOLHA UM BASEADO NA SUA VERSÃO DO MYSQL)
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5Dialect
+(ESCOLHA UM BASEADO NA SUA VERSÃO DO MYSQL)
+```
+
 ## Execução
 
 ### Com Maven
